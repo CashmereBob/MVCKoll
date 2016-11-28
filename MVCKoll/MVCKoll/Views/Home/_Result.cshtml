@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MVCKoll.Models.AdressViewModel>
+
+@foreach (var item in Model)
+{
+
+    var ajaxOptionsEdit = new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = item.id.ToString(),
+    };
+
+    var ajaxOptionsDelete = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        Confirm = $"Är du säker på att du vill ta bort {item.Name} från Adressboken?",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "result"
+    };
+
+
+    <tr id="@item.id">
+        <td>
+
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefonnr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Ajax.ActionLink("Edit", "Edit", new { id = item.id }, ajaxOptionsEdit) |
+            @Ajax.ActionLink("Delete", "Delete", new { id = item.id }, ajaxOptionsDelete)
+        </td>
+    </tr>
+}

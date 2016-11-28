@@ -1,0 +1,22 @@
+﻿@{
+    var ajaxOption = new AjaxOptions {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "addAdress",
+    };
+
+ }
+
+<tr>
+    <th>
+       
+    </th>
+    <th>
+   
+    </th>
+    <th>
+       
+    </th>
+    <th></th>
+    <th>@Ajax.ActionLink("Add Adress", "Create", ajaxOption)</th>
+</tr>

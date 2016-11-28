@@ -1,0 +1,36 @@
+﻿@model MVCKoll.Models.AdressViewModel
+
+@{
+    var ajaxOptionsEdit = new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = Model.id.ToString(),
+    };
+
+    var ajaxOptionsDelete = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        Confirm = $"Är du säker på att du vill ta bort {Model.Name} från Adressboken?",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "result"
+    };
+
+}
+<td>
+
+    @Html.DisplayFor(modelItem => Model.Name)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => Model.Adress)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => Model.Telefonnr)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => Model.Date)
+</td>
+<td>
+    @Ajax.ActionLink("Edit", "Edit", new { id = Model.id }, ajaxOptionsEdit) |
+    @Ajax.ActionLink("Delete", "Delete", new { id = Model.id }, ajaxOptionsDelete)
+</td>

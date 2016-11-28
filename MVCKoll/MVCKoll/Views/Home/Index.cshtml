@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MVCKoll.Models.AdressViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Adress</h2>
+@{ var ajaxOptions = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "result"
+    };
+}
+
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefonnr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+    <tbody id="addAdress">
+        @Html.Partial("_cancelAdress")
+    </tbody>
+    
+
+
+    <tbody id="result">
+        @Html.Partial("_Result")
+    </tbody>
+
+</table>
+

@@ -1,0 +1,46 @@
+﻿@model MVCKoll.Models.AdressViewModel
+
+@{
+    var ajaxOptionCancel = new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = Model.id.ToString()
+    };
+
+    var ajaxOptions = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = Model.id.ToString()
+    };
+
+
+}
+
+@using (Ajax.BeginForm("Edit", "Home", ajaxOptions, new { id = $"form{Model.id}" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    <td>
+
+        @Html.TextBoxFor(modelItem => Model.Name, new { form = $"form{Model.id}" })
+    </td>
+    <td>
+        @Html.TextBoxFor(modelItem => Model.Adress, new { form = $"form{Model.id}" })
+    </td>
+    <td>
+        @Html.TextBoxFor(modelItem => Model.Telefonnr, new { form = $"form{Model.id}" })
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Date, new { form = $"form{Model.id}" })
+    </td>
+    <td>
+
+        <input type="submit" name="submit" value="update" form="@string.Format($"form{Model.id}")" /> |
+        @Ajax.ActionLink("Cancel", "Cancel", new { id = Model.id }, ajaxOptionCancel)
+    </td>
+}
+
+

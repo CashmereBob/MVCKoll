@@ -1,0 +1,41 @@
+﻿@model MVCKoll.Models.AdressViewModel
+
+@{ 
+
+    var ajaxOptionCancel = new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "addAdress"
+    };
+
+    var ajaxOption = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "result",
+        OnComplete = "ResetResults"
+    };
+}
+
+@using (Ajax.BeginForm("Create", "Home", ajaxOption, new { id = "addform" }))
+{
+    @Html.AntiForgeryToken()
+
+<tr>
+    <td>
+        @Html.EditorFor(modelItem => Model.Name, new { htmlAttributes = new { form = "addform" } })
+    </td>
+    <td>
+        @Html.EditorFor(modelItem => Model.Adress, new { htmlAttributes = new { form = "addform" } })
+    </td>
+    <td>
+        @Html.EditorFor(modelItem => Model.Telefonnr, new { htmlAttributes = new { form = "addform" } })
+    </td>
+    <td></td>
+    <td>
+        <input type="submit" name="submit" value="submit" form="addform"/> |
+            @Ajax.ActionLink("Cancel", "CancelAdress", ajaxOptionCancel)
+    </td>
+</tr>
+}
